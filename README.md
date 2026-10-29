@@ -82,6 +82,25 @@ With `node-reinstall` in your [$PATH](http://en.wikipedia.org/wiki/PATH_%28varia
 node-reinstall
 ```
 
+## Tests
+
+With Bash, Make and [bats-core](https://github.com/bats-core/bats-core) installed,
+run `make test`. Alternatively, run Bats directly from a source checkout:
+
+```sh
+git clone --depth 1 --branch v1.12.0 https://github.com/bats-core/bats-core.git /tmp/bats-core
+make test BATS=/tmp/bats-core/bin/bats
+```
+
+Travis CI runs the same target with bats-core v1.12.0 pinned to its commit.
+The tests use temporary home/prefix directories and a restricted command path.
+They record cleanup, download and install requests without executing them; no
+sudo privileges, network access or Node installation are needed for the tests.
+Coverage includes CLI exits, version/manager selection and confirmation prompts.
+These are simulated dependency tests, not real Node reinstalls. In particular,
+they do not validate remote NVM release resolution or restoring nonempty global
+module lists. The installer itself is unchanged.
+
 
 ## Usage
 

@@ -138,3 +138,12 @@ load helpers
   [ -f "$FIXTURE/home/.npmrc" ]
   [[ "$output" == *'You must restart your terminal for changes to take effect.'* ]]
 }
+
+@test "restores multiple global modules including scoped names without npm itself" {
+  NPM_PRESENT=1
+  GLOBAL_MODULES_FIXTURE=1
+  run reinstall --force --nave
+  [ "$status" -eq 0 ]
+  assert_called 'npm install --global typescript @scope/tool'
+  [[ "$output" != *'extra operand'* ]]
+}

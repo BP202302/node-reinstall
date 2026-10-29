@@ -16,6 +16,7 @@ setup() {
   done
   INSTALLED_VERSION=
   NPM_PRESENT=0
+  GLOBAL_MODULES_FIXTURE=0
 }
 
 teardown() {
@@ -31,7 +32,7 @@ reinstall() {
   # Do not inherit exported shell functions, BASH_ENV, NVM_DIR or user settings.
   env -i HOME="$FIXTURE/home" PREFIX="$FIXTURE/prefix" \
     PATH="$FIXTURE/bin" TRACE="$TRACE" \
-    INSTALLED_VERSION="$INSTALLED_VERSION" NPM_PRESENT="$NPM_PRESENT" \
+    INSTALLED_VERSION="$INSTALLED_VERSION" NPM_PRESENT="$NPM_PRESENT" GLOBAL_MODULES_FIXTURE="$GLOBAL_MODULES_FIXTURE" \
     /bin/bash "$SCRIPT" "$@"
 }
 

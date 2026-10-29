@@ -96,10 +96,12 @@ Travis CI runs the same target with bats-core v1.12.0 pinned to its commit.
 The tests use temporary home/prefix directories and a restricted command path.
 They record cleanup, download and install requests without executing them; no
 sudo privileges, network access or Node installation are needed for the tests.
-Coverage includes CLI exits, version/manager selection and confirmation prompts.
-These are simulated dependency tests, not real Node reinstalls. In particular,
-they do not validate remote NVM release resolution or restoring nonempty global
-module lists. The installer itself is unchanged.
+Coverage includes CLI exits, version/manager selection, confirmation prompts,
+and restoration requests for multiple global modules including scoped names.
+The installer reads each npm listing path separately, preserves scoped package
+names and excludes npm itself from the reinstall list.
+These are simulated dependency tests, not real Node reinstalls. They do not
+validate remote NVM release resolution or real global-package installation.
 
 
 ## Usage
